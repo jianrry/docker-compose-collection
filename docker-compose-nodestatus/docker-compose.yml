@@ -1,0 +1,78 @@
+version: '3'
+
+services:
+
+    nginx:
+        # 镜像
+        image: nginx
+        # 容器名
+        container_name: nginx        
+        # 端口
+        ports:
+            # 80 端口
+            - "80:80"
+            # 443 端口
+            - "443:443"
+        # 数据卷    
+        volumes:
+            # Nginx 配置文件夹
+            - "./nginx/config:/etc/nginx/conf.d"
+            # Nginx 站点的根目录
+            - "./nginx/html:/html"
+            # Nginx 日志文件夹
+            - "./nginx/log:/log"
+            # SSL 证书文件夹
+            - "./nginx/ssl:/ssl"
+        # 在容器退出时，总是重启容器    
+        restart: always
+
+    nodestatus:
+        # 镜像
+        image: cokemine/nodestatus
+        # 容器名
+        container_name: nodestatus
+        # 数据卷
+        volumes:
+            # NodeStatus 配置文件
+            - ./nodestatus/server:/usr/local/NodeStatus/server
+            # NodeStatus 临时文件            
+            - ./nodestatus/tmp:/tmp:rw            
+        # 环境变量 
+        environment:
+            # 端口，默认35601
+            PORT: 35601
+            # verbose 模式，默认 false
+            VERBOSE: "false"
+            # 主题，hotaru-theme
+            THEME: "hotaru-theme"
+            # Telegram 推送，默认 true
+            USE_PUSH: "true"
+            # IPC，默认 true
+            USE_IPC: "true"
+            # IPC 面板，默认 true
+            USE_WEB: "true"
+            # IPC 面板用户名，默认 admin
+            WEB_USERNAME: ""
+            # IPC 面板密码，默认为空
+            WEB_PASSWORD: ""
+            # IPC 面板密钥，如果不填，默认和密码相同
+            WEB_SECRET: ""
+            # 推送超时时间，默认 30
+            PUSH_TIMEOUT: 30
+            # 推送延迟时间，默认 15
+            PUSH_DELAY: 15
+            # Telegram token，默认为空
+            TGBOT_TOKEN: ""
+            # Telegram chatid，默认为空
+            TGBOT_CHATID: ""
+            # Telegram 代理服务器，默认为空
+            TGBOT_PROXY: ""
+            # Telegram webhook，默认为空
+            TGBOT_WEBHOOK: ""
+        # 在容器退出时，总是重启容器
+        restart: always
+
+       
+
+
+         

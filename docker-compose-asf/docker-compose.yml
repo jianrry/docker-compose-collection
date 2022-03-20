@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+    nginx:
+        # 镜像
+        image: nginx
+        # 容器名
+        container_name: nginx        
+        # 端口
+        ports:
+            # 80 端口
+            - "80:80"
+            # 443 端口
+            - "443:443"
+        # 数据卷    
+        volumes:
+            # Nginx 配置文件夹
+            - "./nginx/config:/etc/nginx/conf.d"
+            # Nginx 站点的根目录
+            - "./nginx/html:/html"
+            # Nginx 日志文件夹
+            - "./nginx/log:/log"
+            # SSL 证书文件夹
+            - "./nginx/ssl:/ssl"
+        # 在容器退出时，总是重启容器    
+        restart: always 
+
+    asf:
+        # 镜像
+        image: justarchi/archisteamfarm
+        # 容器名
+        container_name: asf        
+        # 数据卷
+        volumes:
+            # ASF 配置文件夹
+            - ./asf/config:/app/config
+            # ASF 插件文件夹
+            - ./asf/plugin:/app/plugins
+            # ASF 日志文件夹
+            - ./asf/log:/app/logs
+        # 在容器退出时，总是重启容器    
+        restart: always
+
+       
+
+
+         
