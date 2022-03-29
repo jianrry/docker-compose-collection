@@ -31,6 +31,12 @@ services:
         image: linuxserver/qbittorrent:14.3.9
         # 容器名        
         container_name: qbittorrent
+        # 端口        
+        ports:
+            # TCP 端口
+            - 6881:6881
+            # UDP 端口
+            - 6881:6881/udp        
         # 数据卷            
         volumes:
             # QBittorrent 配置文件夹
