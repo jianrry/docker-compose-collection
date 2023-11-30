@@ -26,25 +26,11 @@ services:
         # 在容器退出时，总是重启容器    
         restart: always 
 
-    bitwarden:
+    book:
         # 镜像
-        image: vaultwarden/server:latest
+        image: zbook/zbook:latest
         # 容器名
-        container_name: bitwarden        
-        # 数据卷
-        volumes:
-            # Bitwarden 数据文件夹
-            - ./bitwarden:/data           
-        # 环境变量    
-        environment:
-            # 关闭用户注册
-            - SIGNUPS_ALLOWED=false
-            # 开启 Web 客户端
-            - WEB_VAULT_ENABLED=true
-            # Bitwarden 域名
-            - DOMAIN=https://bitwarden.jianrry.com
-        # 在容器退出时，总是重启容器    
-        restart: always
+        container_name: book        
        
 
 

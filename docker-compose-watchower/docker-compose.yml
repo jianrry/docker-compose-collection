@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+    watchtower:
+        # 镜像
+        image: containrrr/watchtower
+        # 容器名
+        container_name: watchtower        
+        # 数据卷    
+        volumes:
+            # Docker Sock
+            - "/var/run/docker.sock:/var/run/docker.sock"
